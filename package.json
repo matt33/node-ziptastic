@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Ben Drucker <bvdrucker@gmail.com>",
   "description": "A small wrapper around the Ziptastic ZIP lookup service",
-  "main": "zipmark.js",
+  "main": "ziptastic.js",
   "dependencies": {
     "request": "~2.27.0",
     "q": "~0.9.6"
