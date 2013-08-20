@@ -1,7 +1,7 @@
 Q = require 'q'
 request = require 'request'
 
-parse = (zip) ->
+exports.parse = (zip) ->
 	deferred = Q.defer()
 	request.get "http://zip.elevenbasetwo.com/v2/US/#{zip}", (err, res, body) ->
 		if err
