@@ -1,4 +1,4 @@
-# node-zipmark
+# Ziptastic
 
 Use the [Ziptastic](http://daspecster.github.io/ziptastic/) API to retrieve city and state information from a zip code. 
 
