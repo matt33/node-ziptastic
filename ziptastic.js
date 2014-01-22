@@ -1,30 +1,53 @@
 'use strict';
 
 var Promise = require('bluebird'),
-    request = Promise.promisify(require('request')),
+    request = Promise.promisify(require('request').get),
     _       = require('lodash');
 
-var baseURL = 'http://zip.elevenbasetwo.com/v2';
 
-var Ziptastic = {
+function Ziptastic(endpoint) {
+	this.endpoint = endpoint || 'http://zip.elevenbasetwo.com/v2';
+}
+
+Ziptastic.prototype = {
 	url: function(options) {
-		return [baseURL, options.country, options.zip].join('/');
+		return [this.endpoint, options.country, options.zip].join('/');
 	},
-	parse: Promise.method(function(options, callback) {
-		options = _.defaults(options || {}, {
-			country: 'US'
-		});
+	parse: function(options, callback) {
+		return Promise.try(function() {
 
-		if (!options.zip) {
-			throw new Error('A ZIP code must be supplied');
-		}
+			if ((_.isString(options) || _.isNumber(options)) && options.toString().match(/^[0-9]+$/)) {
+				options = {
+					zip: options
+				};
+			}
 
-		return request(this.url(options))
-			.spread(function(response, body) {
-				return body;
-			})
-			.nodeify(callback);
-	})
+			options = _.defaults(options || {}, {
+				country: 'US'
+			});
+
+			if (!options.zip) {
+				throw new Error('A ZIP code must be supplied');
+			}
+
+			return request({
+				json: true,
+				url: this.url(options)
+			}).spread(function(response, body) {
+				if (response.statusCode >= 400) {
+					var err = new Error('Request failed');
+					err.response = response;
+					throw err;
+				} else {
+					return body;
+				}
+			});
+		}, null, this).nodeify(callback);
+	}
 };
 
-module.exports = _.extend(Ziptastic.parse, Ziptastic);
+var ziptastic = new Ziptastic();
+
+module.exports = _.extend(ziptastic.parse.bind(ziptastic), {
+	Ziptastic: Ziptastic
+});
