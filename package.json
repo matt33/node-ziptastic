@@ -1,6 +1,6 @@
 {
   "name": "ziptastic",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "author": "Ben Drucker <bvdrucker@gmail.com>",
   "description": "A small wrapper around the Ziptastic ZIP lookup service",
   "main": "ziptastic.js",
@@ -22,5 +22,8 @@
     "sinon-chai": "~2.4.0",
     "mocha-as-promised": "~2.0.0",
     "chai-as-promised": "~4.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }
