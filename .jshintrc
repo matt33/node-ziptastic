@@ -111,9 +111,12 @@
 
     "maxerr"        : 100,      // Maximum errors before stopping.
     "predef"        : [         // Extra globals.
-        //"exampleVar",
-        //"anotherCoolGlobal",
-        //"iLoveDouglas"
+        "describe",
+        "before",
+        "after",
+        "beforeEach",
+        "afterEach",
+        "it"
     ],
     "indent"        : 4         // Specify indentation spacing
 }
