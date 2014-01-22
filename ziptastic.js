@@ -9,6 +9,11 @@ function Ziptastic(endpoint) {
 	this.endpoint = endpoint || 'http://zip.elevenbasetwo.com/v2';
 }
 
+Ziptastic.create = function(endpoint) {
+	var ziptastic = new Ziptastic(endpoint);
+	return ziptastic.parse.bind(ziptastic);
+};
+
 Ziptastic.prototype = {
 	url: function(options) {
 		return [this.endpoint, options.country, options.zip].join('/');
@@ -49,5 +54,6 @@ Ziptastic.prototype = {
 var ziptastic = new Ziptastic();
 
 module.exports = _.extend(ziptastic.parse.bind(ziptastic), {
-	Ziptastic: Ziptastic
+	Ziptastic: Ziptastic,
+	create: Ziptastic.create
 });

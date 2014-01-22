@@ -32,6 +32,11 @@ describe('Ziptastic — Unit Tests', function() {
 			.to.equal(endpoint);
 	});
 
+	it('can create instances and return the parse function', function() {
+		expect(ziptastic.create('ep'))
+			.to.be.a('function');
+	});
+
 	describe('#url', function() {
 		it('joins the URL components with a "/"', function() {
 			this.ziptastic.endpoint = 'E';
