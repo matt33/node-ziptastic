@@ -6,11 +6,12 @@
   "main": "ziptastic.js",
   "dependencies": {
     "request": "~2.27.0",
-    "q": "~0.9.6"
+    "bluebird": "~1.0.0",
+    "lodash": "~2.4.1"
   },
   "repository": {
-  	"type": "git",
-  	"url": "http://github.com/bendrucker/node-ziptastic.git"
+    "type": "git",
+    "url": "http://github.com/bendrucker/node-ziptastic.git"
   },
   "license": "MIT"
 }
