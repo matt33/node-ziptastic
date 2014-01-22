@@ -1,5 +1,7 @@
 # Ziptastic
 
+[![Build Status](https://travis-ci.org/bendrucker/node-ziptastic.png?branch=master)](https://travis-ci.org/bendrucker/node-ziptastic)
+
 Use the [Ziptastic](http://daspecster.github.io/ziptastic/) API to retrieve city and state information from a zip code. 
 
 ## MIT License
