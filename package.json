@@ -13,5 +13,12 @@
     "type": "git",
     "url": "http://github.com/bendrucker/node-ziptastic.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nock": "~0.27.1",
+    "chai": "~1.8.1",
+    "mocha": "~1.17.0",
+    "sinon": "~1.7.3",
+    "sinon-chai": "~2.4.0"
+  }
 }
