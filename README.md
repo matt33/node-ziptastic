@@ -1,28 +1,91 @@
-# Ziptastic
+# Ziptastic [![Build Status](https://travis-ci.org/bendrucker/node-ziptastic.png?branch=master)](https://travis-ci.org/bendrucker/node-ziptastic) [![NPM version](https://badge.fury.io/js/ziptastic.png)](http://badge.fury.io/js/ziptastic)
 
-[![Build Status](https://travis-ci.org/bendrucker/node-ziptastic.png?branch=master)](https://travis-ci.org/bendrucker/node-ziptastic)
+Use the [Ziptastic](http://daspecster.github.io/ziptastic/) API to retrieve city and state information from a zip code.
 
-Use the [Ziptastic](http://daspecster.github.io/ziptastic/) API to retrieve city and state information from a zip code. 
+## Getting Started
 
-## MIT License
+Install from [npm](https://npmjs.org/package/ziptastic):
 
-Copyright 2013 Ben Drucker
+```shell
+npm install ziptastic
+```
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+## Executing Queries
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+##### `ziptastic(options, [callback])` -> `promise`
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The library exposes the ZIP parser function directly. It returns a promise, but will also call a node-style callback if one is passed in.
+
+```javascript
+var ziptastic = require('ziptastic');
+var query = {
+	zip: '10000',
+	country: 'US'
+};
+```
+
+Using promises:
+
+```javascript
+ziptastic(query).then(function(location) {
+	// location => {city: "New York City", state: "New York", country: "US"}
+});
+```
+
+Using callbacks: 
+
+```javascript
+ziptastic(query, function(err, location) {
+	// location => {city: "New York City", state: "New York", country: "US"}
+});
+```
+
+The function expects an object with properties `zip` and `country`. If no country is provided, it defaults to `US`. If the `options` argument is a number or numeric string, the library will assume it is a zip code in the US. All of the following are equivalent to the original query: 
+
+```javascript
+ziptastic(10000);
+ziptastic('10000');
+ziptastic({zip: '10000'});
+```
+
+## Custom Instances
+You can construct custom instances with your own endpoint if you're running the [ziptastic application](https://github.com/daspecster/ziptastic) on your own server. The constructor is stored on the parser function:
+
+```javascript
+var ziptastic = ziptastic.create('http://mycustomendpoint.com');
+```
+
+`ziptastic.create` returns the `parse` function bound to an instance with your `endpoint`. You can also get full access to the instance using:
+
+```javascript
+var ziptastic = new ziptastic.Ziptastic([endpoint]);
+```
+
+## Handling Errors
+
+The library will automatically convert HTTP status codes >= 400 into errors. Catch them using promises:
+
+```javascript
+ziptastic('100').catch(function(err) {
+	err instanceof Error // => true
+});
+```
+
+Or callbacks:
+```javascript
+ziptastic('100', function(err, location) {
+	err instanceof Error // => true
+});
+```
+
+The error stores the raw response object from [request](https://github.com/mikeal/request) as `err.response` for easy debugging.
+
+## Tests
+
+```shell
+npm test
+```
+
+## License
+
+[MIT License](LICENSE.md)
