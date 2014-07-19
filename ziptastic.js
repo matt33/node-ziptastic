@@ -6,7 +6,7 @@ var Promise = require('bluebird'),
 
 
 function Ziptastic(endpoint) {
-	this.endpoint = endpoint || 'http://zip.elevenbasetwo.com/v2';
+	this.endpoint = endpoint || 'http://zip.getziptastic.com/v2';
 }
 
 Ziptastic.create = function(endpoint) {

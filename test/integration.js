@@ -9,8 +9,11 @@ describe('Ziptastic — Integration Tests', function() {
 		return expect(ziptastic(10009))
 			.to.eventually.deep.equal({
 				city: 'New York City',
+				country: 'US',
+				county: 'New York',
 				state: 'New York',
-				country: 'US'
+				state_short: 'NY',
+				postal_code: '10009'
 			});
 	});
 
