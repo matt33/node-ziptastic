@@ -23,7 +23,7 @@ describe('Ziptastic — Unit Tests', function() {
 
 	it('defaults to the public endpoint', function() {
 		expect(this.ziptastic.endpoint)
-			.to.equal('http://zip.elevenbasetwo.com/v2');
+			.to.equal('http://zip.getziptastic.com/v2');
 	});
 
 	it('can be constructed with a custom endpoint', function() {
