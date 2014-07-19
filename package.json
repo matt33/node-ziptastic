@@ -5,9 +5,9 @@
   "description": "A small wrapper around the Ziptastic ZIP lookup service",
   "main": "ziptastic.js",
   "dependencies": {
-    "request": "~2.27.0",
-    "bluebird": "~1.0.0",
-    "lodash": "~2.4.1"
+    "bluebird": "~2.2.2",
+    "lodash": "~2.4.1",
+    "request": "~2.37.0"
   },
   "repository": {
     "type": "git",
@@ -15,13 +15,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "nock": "~0.22.1",
-    "chai": "~1.8.1",
-    "mocha": "~1.17.0",
-    "sinon": "~1.7.3",
-    "sinon-chai": "~2.4.0",
-    "mocha-as-promised": "~2.0.0",
-    "chai-as-promised": "~4.1.0"
+    "chai": "~1.9.1",
+    "chai-as-promised": "~4.1.1",
+    "mocha": "~1.20.1",
+    "nock": "~0.42.1",
+    "sinon": "~1.10.3",
+    "sinon-chai": "~2.5.0"
   },
   "scripts": {
     "test": "mocha"
